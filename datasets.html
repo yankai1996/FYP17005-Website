@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>FYP17005</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="css/main.css" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/load.js"></script>
+		<script src="js/jquery.scrollex.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/main.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	</head>
+	<body class="subpage" onload="load('methodology');loadSubheader('datasets')">
+
+		<!-- Header -->
+		<header id="header">
+			<!-- load -->
+		</header>
+
+		<!-- Nav -->
+		<nav id="menu">
+			<!-- load -->
+		</nav>
+
+		<!-- SubHeader -->
+		<div id="subheader" class="wrapper style3" style="padding: 1rem 0rem">
+			<!-- load -->
+		</div>
+
+		<!-- Methodology -->
+		<section id="One" class="wrapper style2" style="padding-top: 5rem">
+			<div class="inner">
+				<div class="box">
+
+
+<!-- Content -->
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> Provided by Microsoft</p>
+				<h2>Comments on Microsoft Laptops</h2>
+			</header>
+		</div>
+		<div>
+			<div id="laptops" class="content-text">
+				<p>The first dataset we collected holds 13,889 recolds, each containing a short sentence taken from customers' feedback of Microsoft laptops, together with a label indicating the sentence's sentiment from one of “positive”, “negative”, “neutral”, and “multiple sentiments”. The following table shows the distribution of the data.</p>
+				<div class="table-wrapper">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Label</th><th>Number</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Positive</td><td>9,202</td>
+							</tr>
+							<tr>
+								<td>Negative</td><td>2,799</td>
+							</tr>
+							<tr>
+								<td>Neutral</td><td>1,424</td>
+							</tr>
+							<tr>
+								<td>Multiple</td><td>464</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td></td><td>13,889</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<p>There are two problems of this dataset:</p>
+				<ol>
+					<li>This severe skewness may significantly affect the accuracy of deep learning models;</li>
+					<li>The small volume may not be sufficient to train models that can learn general features of expressing sentiments.</li>
+				</ol>
+				<p> The following are some sample sentences with their labels in this dataset:</p>
+				<div class="table-wrapper" style="max-width:500px">
+					<table class="table sample">
+						<thead>
+							<tr>
+								<th>Sentence</th><th>Label</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>性能不错散热很好 笔记本很漂亮 大划算了</td><td>Positive</td>
+							</tr>
+							<tr>
+								<td>笔记本键盘和触摸板手感各种差</td><td>Negative</td>
+							</tr>
+							<tr>
+								<td>电磁笔使用流畅就是充电的时候有点不灵活</td><td>Multiple</td>
+							</tr>
+							<tr>
+								<td>全新游匣7000最高可选英特尔酷睿i7处理器</td><td>Neutral</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> Collected from 豆瓣电影 Website</p>
+				<h2>Movie Reviews from Douban</h2>
+			</header>
+		</div>
+		<div>
+			<div id="movie-reviews" class="content-text">
+				<p>To tackle the problem of small datasets, another dataset has been collected from <a href="https://movie.douban.com/">Douban Movie (豆瓣电影)</a>. This dataset contains  over 2 millions entries and it's large enough for this project. Each entry in this dataset comprehends a short review of a movie in simplified Chinese, together with a score given to that movie from 1 to 5.</p>
+				<p>Using movie reviews and corresponding scores to perform sentiment analysis is a common practice in the field of NLP. The reason is that the scores can be directly used as labels of sentiments. For example, score 1 represents “most negative”, score 2 is “somewhat negative”, and score 5 means “most positive”, etc. The following table shows the distribution of this dataset. </p>
+				<div class="table-wrapper">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Label</th><th>Meaning</th><th>Number</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>5</td><td>Most Positive</td><td>638,106</td>
+							</tr>
+							<tr>
+								<td>4</td><td>Somewhat Positive</td><td>641,785</td>
+							</tr>
+							<tr>
+								<td>3</td><td>Neutral</td><td>474,558</td>
+							</tr>
+							<tr>
+								<td>2</td><td>Somewhat Negative</td><td>179,678</td>
+							</tr>
+							<tr>
+								<td>1</td><td>Most Negative</td><td>190,926</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="2"></td><td>2,125,053</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<p>Here are some examle sentences in this dataset:</p>
+				<div class="table-wrapper" style="max-width:500px">
+					<table class="table sample">
+						<thead>
+							<tr>
+								<th>Sentence</th><th>Label</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>一部能够让人找回爱的电影。</td><td>5</td>
+							</tr>
+							<tr>
+								<td>也有笑点，最后的也不虐心，挺好。</td><td>4</td>
+							</tr>
+							<tr>
+								<td>中国式的美国大片，特效做的也不错，就是剧情没什么新意。</td><td>3</td>
+							</tr>
+							<tr>
+								<td>片段太跳跃，没看过原著的人有可能看不明白。</td><td>2</td>
+							</tr>
+							<tr>
+								<td>简直就是炫富，胡扯。</td><td>1</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> Collected from 豆瓣读书 Website</p>
+				<h2>Book Reviews from Douban</h2>
+			</header>
+		</div>
+		<div>
+			<div id="movie-reviews" class="content-text">
+				<p>To tackle the problem of small datasets, another dataset has been collected from <a href="https://book.douban.com/">Douban Book (豆瓣读书)</a>. This dataset contains  over 2 millions entries and it's large enough for this project. Each entry in this dataset comprehends a short review of a movie in simplified Chinese, together with a score given to that movie from 1 to 5.</p>
+				<p>Using movie reviews and corresponding scores to perform sentiment analysis is a common practice in the field of NLP. The reason is that the scores can be directly used as labels of sentiments. For example, score 1 represents “most negative”, score 2 is “somewhat negative”, and score 5 means “most positive”, etc. The following table shows the distribution of this dataset. </p>
+				<div class="table-wrapper">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Label</th><th>Meaning</th><th>Number</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>5</td><td>Most Positive</td><td>2,258,478</td>
+							</tr>
+							<tr>
+								<td>4</td><td>Somewhat Positive</td><td>1,838,869</td>
+							</tr>
+							<tr>
+								<td>3</td><td>Neutral</td><td>801,736</td>
+							</tr>
+							<tr>
+								<td>2</td><td>Somewhat Negative</td><td>144,806</td>
+							</tr>
+							<tr>
+								<td>1</td><td>Most Negative</td><td>71,328</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="2"></td><td>5,115,217</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<p>Here are some examle sentences in this dataset:</p>
+				<div class="table-wrapper" style="max-width:500px">
+					<table class="table sample">
+						<thead>
+							<tr>
+								<th>Sentence</th><th>Label</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>用身临其境的叙述，坚硬凛然的信仰之力，使人念念不忘。</td><td>5</td>
+							</tr>
+							<tr>
+								<td>这本书的形式很新颖，但除了新奇和想象力似乎没有更多的东西？</td><td>4</td>
+							</tr>
+							<tr>
+								<td>这书无论从哪方面来讲，都是太过稀松平常的故事了。</td><td>3</td>
+							</tr>
+							<tr>
+								<td>我不太喜欢这种只是讨论一个社会问题，而没有太多可操作性的书。</td><td>2</td>
+							</tr>
+							<tr>
+								<td>看着一个作家成了三流网文写手，真的非常失望。</td><td>1</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text" style="border-bottom: none;">
+		<div class="align-center">
+			<header class="align-center">
+				<p>Simplifying, Segmenting, Splitting, Filtering, Replacing & Converting</p>
+				<h2>Data Preprocessing</h2>
+			</header>									
+		</div>
+		<div>
+			<div id="data-preprocessing" class="content-text hidden">
+				<h3>Simplification of Chinese</h3>
+				<p>A careful examination of the datasets discovered that some users prefer to use traditional Chinese when writing comments online. For instance, in the Douban movie review dataset, around 2.5% (53,966 out of 2,125,053) comments are written in traditional Chinese. In consideration of the same meaning shared between traditional and simplified Chinese characters in most cases, we converted all traditional Chinese texts into simplified Chinese using “SnowNLP”. All characters other than Chinese are preserved during this process.</p>
+				<br>
+
+				<h3>Word Segmentation</h3>
+				<p>To adapt deep learn- ing models initially designed to process English for processing Chinese sentences, word segmentation was performed on all sentences in all the datasets. The third-party library “jieba” was introduced to perform word segmentation because it is the best state-of-the-art solution for Chinese word segmentation currently. The result of segmentation is a list of Chinese words, English words, and punctuation.</p>
+				<br>
+				
+				<h3>Dataset Splitting</h3>
+				<p>As mentioned before, the original datasets are extremely imbalanced. To obtain the balanced datasets, procedures of subsampling were performed. After that, in each of the balanced datasets, we randomly selected 80% of records to form two training sets. The rest of entries formed development set and test set. A deep learning model may overfit the data with only one training set and fail to accommodate unseen data, therefore splitting the dataset into several training sets is a commonly adopted approach that contributes to preventing models from overfitting.</p>
+				<br>
+
+				<h3>Filtering and Replacing</h3>
+				<p>After splitting the datasets, in order to conduct comprehensive experiments, we have several options to preprocess the datasets based on which we can conduct a series of control experiments.</p>
+				<ol>
+					<li><p>Filtering out non-Chinese words</p>
+						<p>The rationale behind filtering out non-Chinese words like English words and punctuations is that we wish our model to focus on Chinese words only, while around 0.7% of the total words appeared in the training sets are English words. Depending on the actual performance, we may choose to filter or not to filter these words or punctuations.</p>
+					</li>
+					<li><p>Removing the most frequent words from the known vocabulary</p>
+						<p>For example, in the training set of Douban book review, the meaningless word “的” appeared 459,153 times, the auxiliary word “了” appeared 119,776 times. These highly frequent Chinese words actually contribute little to the sentiment classification. Therefore, removing them from the known vocabulary can help the models to avoid learning some biased information from these sentimentally meaningless words.</p>
+					</li>
+					<li><p>Removing the rarest words from the known vocabulary</p>
+						<p>The statistics revealed that 47,318 among 112,018 distinct words in the above dataset appeared only once. These words include some identities and rarely idiomatic expression like “法人代表 (legal representative)” and “隐恶扬善 (hide one’s wrongdoing and praise his good deeds)”. Some others are generated due to users’ typos or incorrect word segmentation. If these words are kept within the dataset, the model might overfit whenever the model encounters them. By removing rare words, the dimension of the input one-hot vector can be greatly reduced, and less computation will be required.</p>
+					</li>
+					<li><p>Replacing the words out of vocabulary with “UNKNOWN” token</p>
+						<p>Replacement takes place in all the training sets, development sets and test sets. One reason to introduce the “UNKNOWN” token is that when the model processes a sentence with many unknown words, these “UNKNOWN” tokens will smooth out the emotion hidden in the known words. The desirability of this approach is that for a completely unknown sentence, the best prediction is neutral sentiment, which hopefully is the emotion the model could learn from the “UNKNOWN” token.</p>
+					</li>
+				</ol>
+				<br>
+
+				<h3>CTF Conversion</h3>
+				<p>CNTK Text Format (CTF) is a file format designed by Microsoft for file I/O, and the model input file is required as CTF format in CNTK infrastructure. In addition to traditional dense vector data, CTF supports the storage of sparse one-hot vector using the index of 1 in the vector. A particular word is converted into a sparse one-hot vector. The size of a vector is the total number of known words in the vocabulary file and the index of the 1 element is the position of that word in the vocabulary. A particular label is also converted into a one-hot vector and the size of the vector is the total number of distinct labels. CNTK provides the function “sequence_to_cntk_text_format” which supports converting a group of tensors into CTF format.</p>
+
+				<div class="empty"></div>
+			</div>
+			<div class="readmore">
+				<div id="showall-data-preprocessing" onclick="showall('data-preprocessing')">READ MORE</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- End of Content -->
+
+				</div>
+			</div>
+		</section>
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<!-- load -->
+		</footer>
+
+
+	</body>
+</html>

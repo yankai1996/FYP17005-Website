@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>FYP17005</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="css/main.css" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/load.js"></script>
+		<script src="js/jquery.scrollex.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/main.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	</head>
+	<body class="subpage" onload="load('methodology');loadSubheader('concepts')">
+
+		<!-- Header -->
+		<header id="header">
+			<!-- load -->
+		</header>
+
+		<!-- Nav -->
+		<nav id="menu">
+			<!-- load -->
+		</nav>
+
+		<!-- SubHeader -->
+		<div id="subheader" class="wrapper style3" style="padding: 1rem 0rem">
+			<!-- load -->
+		</div>
+
+		<!-- Methodology -->
+		<section id="One" class="wrapper style2" style="padding-top: 5rem">
+			<div class="inner">
+				<div class="box">
+
+
+<!-- Content -->
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p>Related Concepts</p>
+				<h2>One-hot Encoding</h2>
+			</header>
+		</div>
+		<div>
+			<div id="one-hot" class="content-text">
+				<p>Generally, machine learning models take input variables in vector forms. In order to feed words which have no intuitive vector representations into artificial neural networks, each word has to be encoded into a unique vector.</p>
+				<p>The most commonly adopted method is called "<a href="https://en.wikipedia.org/wiki/One-hot">one-hot</a> encoding", which represents each word \(w\) in a sorted vocabulary \(V\) as an \(\mathbb{R}^{\|V\|}\) vector with a single 1 at the index of \(w\) in \(V\) and 0s at all the other positions. \(\|V\|\) means the size of the vocabulary. For example:</p>
+				<p>$$
+				  w_{abandon} = \begin{bmatrix}
+				    1 \\ 0 \\ 0 \\ \vdots \\ 0
+				  \end{bmatrix},
+				  w_{abase} = \begin{bmatrix}
+				    0 \\ 1 \\ 0 \\ \vdots \\ 0
+				  \end{bmatrix},
+				  \dotsc,
+				  w_{zesty} = \begin{bmatrix}
+				    0 \\ 0 \\ 0 \\ \vdots \\ 1
+				  \end{bmatrix}
+				$$</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p>Related Concepts</p>
+				<h2>Word Embedding</h2>
+			</header>
+		</div>
+		<div>
+			<div id="word-embedding" class="content-text hidden">
+				<p>The simple on-hot encoding has two disadvantages:</p>
+				<ol>
+					<li>This word representation cannot effectively reflect meanings of words and relations between words;</li>
+					<li>One-hot vectors are sparse vectors with lots of 0s and only a single 1, which means that a significant amount of spaces are wasted, causing the model to be inefficient.</li>
+				</ol>
+				<p>In order to overcome these disadvantages, A common practice is to embed one-hot vectors into lower-dimensional dense vectors, such that they can be processed efficiently and also provide information about relations between words.</p>
+				<p>The following figure demonstrates a famous word embedding "<a href="https://en.wikipedia.org/wiki/Word2vec">word2vec</a>".</p>
+				<div class="figure">
+					<img src="images/word2vec.png" alt="" />
+					<p>1000-dimensional embedding vectors learned from word2vec representing different countries and their capitals, pro- jected onto a 2D plane. </p>
+				</div>
+				<p>This figure shows 1000-dimensional embedding vectors representing different countries and their capitals, projected onto a 2D plane for better visualization. It can be observed that vectors pointing from countries to corresponding capitals are roughly parallel to each other and have about the same length. For example:</p>
+				<p>$$w_{China} - w_{Beijing} \cong w_{Russia} - w_{Moscow}$$</p>
+
+				<div class="empty"></div>
+			</div>
+			<div class="readmore">
+				<div id="showall-word-embedding" onclick="showall('word-embedding')">READ MORE</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p>Related Concepts</p>
+				<h2>Word Encoding with Gaussian Filtering</h2>
+			</header>
+		</div>
+		<div>
+			<div id="Gaussian" class="content-text">
+				<p>Apart from word embedding, some other encoding methods are also helpful in some certain NLP tasks. For ordinal classification problems, the difference between each pair of labels should be distinguished from another pair. For instance, a classification over five integers from 1 to 5 may wish to learn the difference between two pairs of vectors, \((w1,w3)\) and \((w1,w5)\). For one-hot encoding, the following vectors are supposed to represent the integers:</p>
+				<p>$$
+				  w_1 = \begin{bmatrix}
+				    1 \\ 0 \\ 0 \\ 0 \\ 0
+				  \end{bmatrix},
+				  \dotsc,
+				  w_3 = \begin{bmatrix}
+				    0 \\ 0 \\ 1 \\ 0 \\ 0
+				  \end{bmatrix},
+				  \dotsc,
+				  w_5 = \begin{bmatrix}
+				    0 \\ 0 \\ 0 \\ 0 \\ 1
+				  \end{bmatrix}
+				$$</p>
+				<p>thus we have &emsp; \(|w_1 - w_3| = |w_3 - w_5|\)</p>
+				<p>The above equation reveals the lost of the ordinal information. To improve the word encoding, <a href="https://en.wikipedia.org/wiki/Gaussian_filter">Gaussian filter</a> can be applied to smoothes the one-hot vectors. Gaussian filter will make the elements of a vector present a Gaussian distribution based on the original vector. For example, the Gaussian filtered vectors of the above vectors would be:</p>
+				<p>$$
+				  w'_1 = \begin{bmatrix}
+				    0.89 \\ 0.10 \\ 0.01 \\ 0 \\ 0
+				  \end{bmatrix},
+				  \dotsc,
+				  w'_3 = \begin{bmatrix}
+				    0.01 \\ 0.10 \\ 0.78 \\ 0.10 \\ 0.01
+				  \end{bmatrix},
+				  \dotsc,
+				  w'_5 = \begin{bmatrix}
+				    0 \\ 0 \\ 0.89 \\ 0.10 \\ 0.01
+				  \end{bmatrix}
+				$$</p>
+				<p>thus, &emsp; \(|w'_1 - w'_3| \not = |w'_3 - w'_5|\)</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p>Related Concepts</p>
+				<h2>Long Short-Term Memory</h2>
+			</header>
+		</div>
+		<div>
+			<div id="LSTM" class="content-text hidden">
+				<p><a href="https://en.wikipedia.org/wiki/Long_short-term_memory">Long Short-Term Memory (LSTM)</a> is a special <a href="https://en.wikipedia.org/wiki/Recurrent_neural_network">Recurrent Neural Network (RNN)</a> architecture inspired by biological memory. RNN has been successfully adopted in existing studies of various NLP tasks because of its flexibility to handle dynamic input sequences and ability to comprehend relations between inputs within a sequence.</p>
+				<p>However, the standard RNN unit contains a single \(tanh\) layer and suffers from the problem of <a href="https://en.wikipedia.org/wiki/Vanishing_gradient_problem">vanishing gradient</a>, thus cannot capture long-term dependencies and cannot be trained efficiently.</p>
+				<p>To solve this problem, LSTM introduces a mechanism of "long-term memory" in addition to the "short-term memory" effect of the standard RNN. The following figure shows the inside look of a LSTM unit.</p>
+				<div class="figure">
+					<img src="images/LSTM.png" alt="" />
+					<p>Inside structure of a LSTM unit. </p>
+				</div>
+				<p>The inputs of an LSTM unit at time point \(t\) include the current input \(x_t\), the previous output \(h_{t-1}\), and the previous memory \(C_{t-1}\). First of all, the unit decides what to "forget" from the previous memory via a "forget gate" defined as</p>
+				<p>$$
+					f_t = \sigma(W_f\cdot[h_{t-1}, x_t] + b_f)
+				$$</p>
+				<p>This gate takes the previous output and the current data as input, and produces values between 0 and 1 via a sigmoid function. Next, the LSTM unit decides what "new knowledge" to memorize with an "input gate":</p>
+				<p>$$
+					i_t = \sigma(W_i\cdot[h_{t-1}, x_t] + b_i)
+				$$</p>
+				<p>And the new information to be memorized is generated by a tanh layer:</p>
+				<p>$$
+					 \tilde{C}_t = \tanh(W_C\cdot[h_{t-1}, x_t] + b_C)
+				$$</p>
+				<p>Having the above definitions, the LSTM unit updates the long-term memory:</p>
+				<p>$$
+					C_t = f_t\ast C_{t-1} + i_t\ast\tilde{C}_t
+				$$</p>
+				<p>Finally, the output of the unit is generated by an "output gate":</p>
+				<p>$$
+					o_t = \sigma(W_o\cdot[h_{t-1}, x_t] + b_o)
+				$$</p>
+				<p>$$
+						h_t = o_t\ast\tanh(C_t)
+				$$</p>
+				<p>LSTM is very useful in NLP tasks because high-level semantics are often reflected in sequences of consecutive words in human languages.</p>
+
+				<div class="empty"></div>
+			</div>
+			<div class="readmore">
+				<div id="showall-LSTM" onclick="showall('LSTM')">READ MORE</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p>Related Concepts</p>
+				<h2>Bidirectional RNN</h2>
+			</header>
+		</div>
+		<div>
+			<div id="BRNN" class="content-text">
+				<p>Standard RNN and LSTM networks take previous information in a sequence into consideration. However, future contexts are ignored. To acquire more information for the network, <a href="https://en.wikipedia.org/wiki/Bidirectional_recurrent_neural_networks">Bidirectional Recurrent Neural Networks (BRNN)</a> were introduced to increase the amount of input information available to the network. In BRNNs, a regular RNN unit is split into two directions, one with the original input sequence (forward pass), and another with the reversed sequence (backward pass). The following figure gives a comparison between the structures of standard RNN and BRNN. With two directions, input information from the past and future of the current time frame can be used, unlike unidirectional RNN which requires the delays for including future information.</p>
+				<div class="figure">
+					<img src="images/RNN-BRNN.png" alt="" />
+					<p>Structure overview of RNN and BRNN: (a) RNN, (b) BRNN.</p>
+				</div>
+				<p>The training processes applied to BRNN are very similar to that of RNN but with slight differences. The structure of BRNN requires additional processes for <a href="https://en.wikipedia.org/wiki/Backpropagation">backpropagation</a> because it cannot update input and output layers at once. Generally, for forward pass, forward states and backward states are passed first, then output neurons are passed. For backward pass, output neurons are passed first, then forward states and backward states are passed next. Then, the weights are updated after these two procedures.</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p>Related Concepts</p>
+				<h2>Convolutional Neural Networks</h2>
+			</header>
+		</div>
+		<div>
+			<div id="CNN" class="content-text">
+				<p><a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">Convolutional Neural Network (CNN)</a> is a widely adopted artificial neural network architecture in deep learning. CNNs use different sizes of "kernels", in other words, sliding windows, to scan inputs and extract high-level patterns. Although the most successful application of CNN is image processing, it also shows potential in natural language processing. Using one-dimensional kernels, CNNs can also extract contextual information like LSTM networks. The following figure shows a sample of design of the architecture of CNN for sentiment analysis. This CNN architecture has achieved noticeable performance across various classification datasets, mostly comprised of sentiment analysis tasks, and new state-of-the-art on a few. </p>
+				<div class="figure">
+					<img src="images/CNNeg.png" alt="" />
+					<p>E.g. CNN model architecture with two channels for an example sentence.</p>
+				</div>
+				<p>Instead of image pixels, the input to CNN model for NLP are sentences represented as a matrix, each row of which corresponds to one embedded word. As what is showed in the above figure, the input is an \(n \times k\) matrix where n is the dimension of word vectors and \(k\) is the length of the longest input in the training data. There are multiple filters and feature maps to capture the features of the sentence, which are expected to be the keywords reflecting the sentiment expressed by the sentence. Finally, there is a fully connected layer with dropout and softmax output to predict the final results.</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text" style="border-bottom: none;">
+		<div class="align-center">
+			<header class="align-center">
+				<p>Related Concepts</p>
+				<h2>Word Segmentation</h2>
+			</header>
+		</div>
+		<div>
+			<div id="word-segmentation" class="content-text">
+				<p>The difference between English and Chinese introduces additional challenges for Chinese language processing. English is a word-based language because in a English sentence, the words are naturally separated by whitespaces. However, the Chinese language is character-based. In most cases, a single Chinese character cannot form by itself a complete semantic group equivalent to an English word. <a href="https://en.wikipedia.org/wiki/Text_segmentation#Word_segmentation">Word segmentation</a> is a process which takes a sequence of Chinese characters and returns the same sequence with semantic words grouped and separated. For a simple example, given a Chinese sentence, “这是一部好电影 (This is a good movie)”, a correct sequence after word segmentation looks like:</p>
+				<p style="text-align:center;">这&emsp;&emsp;是&emsp;&emsp;一部&emsp;&emsp;好&emsp;&emsp;电影</p>
+				<p>In most of Chinese NLP tasks, word segmentation is a necessary procedure before encoding the words into vectors.</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- End of Content -->
+
+
+				</div>
+			</div>
+		</section>
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<!-- load -->
+		</footer>
+
+
+	</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>FYP17005</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="css/main.css" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/load.js"></script>
+		<script src="js/jquery.scrollex.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/main.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	</head>
+	<body class="subpage" onload="load('methodology');loadSubheader('models')">
+
+		<!-- Header -->
+		<header id="header">
+			<!-- load -->
+		</header>
+
+		<!-- Nav -->
+		<nav id="menu">
+			<!-- load -->
+		</nav>
+
+		<!-- SubHeader -->
+		<div id="subheader" class="wrapper style3" style="padding: 1rem 0rem">
+			<!-- load -->
+		</div>
+
+		<!-- Methodology -->
+		<section id="One" class="wrapper style2" style="padding-top: 5rem">
+			<div class="inner">
+				<div class="box">
+
+
+<!-- Content -->
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> model i</p>
+				<h2>LSTM Model</h2>
+			</header>
+		</div>
+		<div>
+			<div id="LSTM" class="content-text">
+				<p>Our insight of designing this model is that LSTM networks are capable of understanding high-level semantics by memorizing words. The basic structure of our model is showed below:</p>
+				<div class="figure">
+					<img style="max-width: 400px" src="images/lstm_model.png" alt="" />
+				</div>
+				<div class="table-wrapper" style="max-width: 100%">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Layer</th><th>Hyperparameters</th><th>output dimension</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Embedding</td><td>embedding dimension</td><td>(sequence length, embedding dimension)</td>
+							</tr>
+							<tr>
+								<td>LSTM</td><td>direction, recurrent dimension</td><td>(sequence length, recurrent dimension)</td>
+							</tr>
+							<tr>
+								<td>Reduce</td><td>reduce method</td><td>(recurrent dimension)</td>
+							</tr>
+							<tr>
+								<td>Dense</td><td>output dimension, activation function</td><td>(output dimension)</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<ol>
+					<li><p>The Embedding layer accepts a sequence of one-hot vectors, which are read from the CTF files created before. The effect of an Embedding layer is to capture the meaning of a word using a vector of size (embedding dimension, ). Embedding dimension is much smaller than the dimension of input one-hot vectors so that words can be represented in a more condense way and words with similar meanings could cluster together. The values of these vectors are updated through the back propagation process. The output of this layer is a sequence of embedded vectors.</p></li>
+					<li><p>The LSTM layer accepts a sequence of vectors and for each input vector, a corresponding output vector of dimension (recurrent dimension, ) is generated. This   layer produces a sequence of out-ut vectors with dimension (lstmdimension, ). The sequence length is the length of input vectors, i.e, the number of words in the sentence, which is not determined. So the actual dimension of output from the recurrent layer is (senquencelength,recurrentdimension).</p></li>
+					<li><p>The Reduce layer eliminates the dynamic sequence dimension by “reduce_max”, “reduce_sum” or “last”. “reduce_max” produces an output vector, with each element being the element-wise maximum of the sequence of vectors. “reduce_sum” produces an output vector, with each element being the element-wise sum of the sequence of vectors. And “last” simply picks the last vector in the output sequence.</p></li>
+					<li><p>The Dense layer is the output layer of our model. Depending on whether classification or regression is used, the output dimension and the activation function might be different.</p></li>
+				</ol>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p>model ii</p>
+				<h2>CNN Model</h2>
+			</header>
+		</div>
+		<div>
+			<div id="Bi-LSTM" class="content-text">
+				<p>Although most CNN models are designed for image related tasks, Recent research showed that it can also be applied to language classification. We designed a CNN based model whose architecture is showed below:</p>
+				<div class="figure">
+					<img src="images/cnn_model.png" alt="" />
+				</div>
+				<div class="table-wrapper" style="max-width: 100%">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Layer</th><th>Hyperparameters</th><th>output dimension</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Embedding</td><td>embedding dimension</td><td>(sequence length, embedding dimension)</td>
+							</tr>
+							<tr>
+								<td>Convolution</td><td>. . .</td><td>(sequence length, embedding dimension, 1)</td>
+							</tr>
+							<tr>
+								<td>Squeeze</td><td>/</td><td>(sequence length, embedding dimension)</td>
+							</tr>
+							<tr>
+								<td>BatchNormalization</td><td>/</td><td>(sequence length, embedding dimension, 1)</td>
+							</tr>
+							<tr>
+								<td>Reduce</td><td>reduce method</td><td>(embedding dimension)</td>
+							</tr>
+							<tr>
+								<td>Dense</td><td>dimension = 50</td><td>(50)</td>
+							</tr>
+							<tr>
+								<td>Dense</td><td>output dimension, activation function</td><td>(output dimension)</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>Specifically, the following table shows the detailed hyperparameter setting of the Convolution layer</p>
+				<div class="table-wrapper">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Hyperparameter</th><th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>kernel size</td><td>(words, embedding dimension)</td>
+							</tr>
+							<tr>
+								<td>kernel</td><td>embedding dimension</td>
+							</tr>
+							<tr>
+								<td>strides</td><td>(1, embedding dimension)</td>
+							</tr>
+							<tr>
+								<td>pad</td><td>True</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>The Embedding layer in the CNN architecture provides the same functionality as it in the RNN model. The main difference between the CNN architecture and the RNN architecture lies at the Convolution layer. Consider the following example, where the input to the Convolution layer is a sequence of \(n\) vectors and the embedding dimension is \(e\), i.e., the length of each vector is \(e\). Assume that the horizontal dimnesion is sequence length and the vertical dimension is the embedding dimension.</p>
+				<p>$$
+				  \begin{bmatrix}
+				    \vdots \\ w_1 \\ \vdots
+				  \end{bmatrix},
+				  \begin{bmatrix}
+				    \vdots \\ w_2 \\ \vdots
+				  \end{bmatrix},
+				  \dotsc,
+				  \begin{bmatrix}
+				    \vdots \\ w_n \\ \vdots
+				  \end{bmatrix}
+				$$</p>
+				<p>The kernel size of Convolution layer is \((words, e)\), where words is a hyperparameter to be tuned. A kernel accepts words adjacent embedded vectors at a time and produces a result. Setting \(words > 1\) can help the convolution layer learning about the relationships between adjacent words. Since it is possible that \(words > n\), this layer will fail to process short sentences containing one word only, it is necessary to allow padding so that when the sentence is short, this layer will pad 0 filled vectors. The horizontal stride is set to be 1 so that the kernel will move forward by one word each time. Since a kernel accepts all the values in the embedding vectors at a time, it must not convolute along the embedding dimension. So the stride along the embedding dimension is set to be \(e\). To facilitate construction of multi-convolutional layers, the number of kernels is simply set to be \(e\), so that when the next layer accepts input from the previous layer, the kernel size can remain unchanged.</p>
+				<p>The squeeze operation is added to squeeze out the additional dimension brought by the convolutional operation. Because of the fact that the horizontal kernel size equals to the embedding dimension, the dimension of output from a convolution layer is (squence length, number of kernels, 1). The last dimension is now unnecessary. After that, a batch normalization layer is added to accelerate training process and avoid covariance shift, which is a common practice.</p>
+				<p>Similar to the RNN architecture, a reduce operation is added after convolution layer because the result from convolution layer still contains dynamic dimension. An additional Dense layer with 50 nodes are added before the output layer.</p>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p>option i</p>
+				<h2>Classification Layer</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>If the task is treated as a classification problem, the number of nodes in the output layer equals to the number of labels. Since only one label can apply to an input, cross entropy with softmax is applied as the loss function. Given an output layer with 5 nodes, the softmax function is given as</p>
+				<p>$$p_i = \frac{e^{z_i}}{\sum^5_{k=1}e^{z_k}}, \forall i \in [1,5]$$</p>
+				<p>where \(z_i\) is the output from the \(i\)-th node. Note that</p>
+				<p>$$\sum^5_{i=1}p_i = 1$$</p>
+				<p>\(p_i\) is interpreted as the probability that the label is \(i\) and therefore the predicted label is \(argmax_i p_i\). Cross entropy is applied as the loss function correspondingly, which is given as</p>
+				<p>$$J(y,p) = -\sum^5_{i=1}y^{(i)}log{p^{(i)}}$$</p>
+				<p>where \(y\) is the label vector and \(p\) is the output from the model after softmax.</p>
+				<p>In addition to the loss function, we wish to measure the accuracy of out model. A prediction is said to be correct if \(argmax_i p = argmax_i y\), where y might be a one-hot vector or a vector after Gaussian filtering.</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text" style="border-bottom: none;">
+		<div class="align-center">
+			<header class="align-center">
+				<p>option ii</p>
+				<h2>Regression Layer</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>If we consider the inter relationships between different labels, the sentiment classification problem can be seen as an ordered classification problem. In order to capture the relationships, regression might be applied. The input format remains the same as it in the classification model. While the output layer now contains one node only, with tanh used as the activation function, which is given as follows:</p>
+				<p>$$tanh(x) = \frac{e^x-e^{-x}}{e^x+e^{-x}}$$</p>
+				<p>Note that \(tanh\) function maps number from \(\mathbb{R}\) to (−1, 1). In a 5-label problem, the output is scaled by a factor of 2.5, so the output ranges from −2.5 to 2.5. The labels are represented as one-hot vectors, where label 1 has \(y(0)\) = 1, and label 2 has \(y(1)\) = 1. So our loss function is given as</p>
+				<p>$$J(z, y) = (z − (argmax_i y^{(i)} − 2))^2$$</p>
+				<p>Where \(z\) ranges from −2.5 to 2.5. \((argmax_i y^{(i)} −2)\) ranges from −2 to 2, therefore, the prediction is correct if \(round(z) == (argmax_i y(i) − 2)\). This loss function captures the fact that label 3 is more closer to label 1 than label 5. Assume the model predicts 2.3, which is label 5, and the ground truth is label 1. The loss (2.3 − (−2))<sup>2</sup> is larger than that of predicting 0.4, which is label 3 with a loss (0.4 − (−2))<sup>2</sup>.</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+<!-- End of Content -->
+
+				</div>
+			</div>
+		</section>
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<!-- load -->
+		</footer>
+
+
+	</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>FYP17005</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="css/main.css" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/load.js"></script>
+		<script src="js/jquery.scrollex.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/main.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	</head>
+	<body class="subpage" onload="load('methodology');loadSubheader('experiments')">
+
+		<!-- Header -->
+		<header id="header">
+			<!-- load -->
+		</header>
+
+		<!-- Nav -->
+		<nav id="menu">
+			<!-- load -->
+		</nav>
+
+		<!-- SubHeader -->
+		<div id="subheader" class="wrapper style3" style="padding: 1rem 0rem">
+			<!-- load -->
+		</div>
+
+		<!-- Methodology -->
+		<section id="One" class="wrapper style2" style="padding-top: 5rem">
+			<div class="inner">
+				<div class="box">
+
+
+<!-- Content -->
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p>Software & Hardware Configuration</p>
+				<h2>Experiment Setup</h2>
+			</header>									
+		</div>
+		<div>
+			<div class="content-text">
+				<h3>Software Configuration</h3>
+				<p>In this project, deep learning models are implemented using Python. Python is the most commonly adopted programming language for deep learning because of its simplicity and compatibility. Compared with low-level languages such as C/C++, Python code is much easier to construct and test. On the other hand, according to Microsoft, the current version of CNTK provides the most updated APIs and most complete documentation and support for Python.</p>
+				<p>Apart from CNTK, several other Python packages including “SnowNLP”, “numpy” and “scipy” have been adopted to facilitate data processing.</p>
+				<div class="table-wrapper" style="max-width: 200px">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>CNTK</td><td>2.5</td>
+							</tr>
+							<tr>
+								<td>Python</td><td>3.6.3</td>
+							</tr>
+							<tr>
+								<td>numpy</td><td>1.14.2</td>
+							</tr>
+							<tr>
+								<td>scipy</td><td>0.18.1</td>
+							</tr>
+							<tr>
+								<td>SnowNLP</td><td>0.12.3</td>
+							</tr>
+							<tr>
+								<td>jieba</td><td>0.39</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<br>
+
+				<h3>Hardware & System Configuration</h3>
+				<p>The models were trained and tested on a 64-bit Ubuntu 16.04 virtual machine deployed on Microsoft Azure. It supports deployment and management of different applications. Apart from that, Azure helps accelerate deep learning tasks with the GPU-powered virtual machine. The detailed hardware and system configurations are shown in the following:</p>
+				<div class="table-wrapper" style="max-width: 350px">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>CPU</td><td>Inter Xeon CPU E5-2690 v4</td>
+							</tr>
+							<tr>
+								<td>GPU</td><td>NVIDIA P40</td>
+							</tr>
+							<tr>
+								<td>Memory</td><td>112GB</td>
+							</tr>
+							<tr>
+								<td>Disk</td><td>100GB + 30GB SSD</td>
+							</tr>
+							<tr>
+								<td>OS</td><td>Ubuntu 16.04 64-bit</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment i</p>
+				<h2>Experiments with the Microsoft Dataset</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>The experiment with the Microsoft dataset was conducted at the early stage of this project. The experiments with this dataset were mainly intended to set our system and experiments up, because this dataset is too small to be used for performance evaluation. The Forward LSTM and Bi-LSTM models were trained and tested with the same hyperparameters.</p>
+				<p>The following figure shows average cross entropy loss of the two models plotted against the number of mini-batches. Each mini-batch contains 50 records of the data. For the 10 epochs of training, the error rates of both Forward LSTM and Bi-LSTM models dropped quickly at the very beginning, and then converged to a small value with slight fluctuation. Both models reached an accuracy of 99% on both the training set and the testing set. As mentioned before, the small dataset is likely to bias the result, thus the high accuracy cannot reflect the real quality of the models.</p>
+				<div class="figure">
+					<img src="images/loss-minibatch.png" alt="" />
+					<p>Average cross entropy loss of Forward LSTM and Bi-LSTM plotted against mini-batches.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment ii</p>
+				<h2>Basic Comparison between Two Douban Datasets</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>The experiments with the douban dataset started with the comparison between the quality of the two datasets using a third-party Chinese NLP library called “SnowNLP”. “SnowNLP” performs sentiment analysis based on a Naive Bayes model. It gives a number, which ranges from 0 to 1, to indicate the extent of the attitude from “most negative” to “most positive”. We selected totally 14,000 sentences from the book review dataset, with 7,000 sentences labeled with 5 and other 7,000 sentences labeled with 1. We mapped the prediction result given by “SnowNLP” to 5 if it was larger than 0.5, otherwise, the result would be mapped to 1. We performed the same procedures over the movie reviews dataset and an accuracy 67% was reached. The experiment result is: </p>
+				<div class="table-wrapper">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Dataset</th><th>Accuracy</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Book Reviews</td><td>69%</td>
+							</tr>
+							<tr>
+								<td>Moview Reviews</td><td>67%</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>Based on this result, it is hypothesized that there is no significant difference between the quality of these two datasets. Therefore, to save our computing resource, we conducted experiments on the book review dataset first. When an ideal model was determined, we would further investigate it with the movie review dataset.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment iii</p>
+				<h2>Grid Search on LSTM</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>We conducted a grid search experiment to determine three hyperparameters in the LSTM model: embedding dimension, recurrent dimension, reducer. The remaining configuration of the model and dataset is showed in the following table.</p>
+				<div class="table-wrapper" style="max-width: 500px">
+					<table class="table sample">
+						<thead>
+							<tr>
+								<th>Item</th><th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Dataset</td><td>Book review</td>
+							</tr>
+							<tr>
+								<td>Gaussian Filtering</td><td>False</td>
+							</tr>
+							<tr>
+								<td>Filter non-Chinese</td><td>True</td>
+							</tr>
+							<tr>
+								<td>Replace frequent words with “UNKNOWN”</td><td>False</td>
+							</tr>
+							<tr>
+								<td>Prediction Method</td><td>Classification</td>
+							</tr>
+							<tr>
+								<td>Direction of LSTM</td><td>Forward</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>To accelerate experiments, we only train for 20 epochs for a hyperparameter combination. The model with the best performance is picked for further tuning. The following figure shows the accuracy of the LSTM models using “reduce_sum” as the reducer.</p>
+				<div class="figure">
+					<img src="images/RNN-reduce-sum.jpg" alt="" />
+					<p>Grid search on LSTM with “reduce_sum” as the reducer.</p>
+				</div>
+				<p>Apparently the model trains either faster or better as the embedding dimension and recurrent dimension increase. This is reasonable because that with larger embedding dimension and recurrent dimension, more information can be captured. The following is the experiment result of LSTM models using “reduce_max”. </p>
+				<div class="figure">
+					<img src="images/RNN-reduce-max.jpg" alt="" />
+					<p>Grid search on LSTM with “reduce_max” as the reducer.</p>
+				</div>
+				<p>“reduce_max” performs worse than “reduce_sum”. As “reduce_max” performs element wise maximization when generating the final output, it mixed outputs in a rather inconsistent way. The context of the maximum value at a particular index of the output vector is not well preserved. Therefore, we believe “reduce_max” is not a good choice for us to continue experiments.</p>
+				<p>The last figure shows the grid search result using “last” as the reducer, i.e., pick the last output from the recurrent unit: </p>
+				<div class="figure">
+					<img src="images/RNN-last.jpg" alt="" />
+					<p>Grid search on LSTM with “last” as the reducer.</p>
+				</div>
+				<p>"last" performs better than the “reduce_max” because all elements in the output vector are consistent with each other and theoretically in a recurrent neural network the output from the last cell contains all the necessary information from the previous cells. However, it is still not as good as the “reduce_sum”. A possible explanation is that with “reduce_sum”, many of the information in the previous cells are better preserved. “last” reducer produces the information of the last word given all the previous words, and “reduce_sum” performs an extra accumulation.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment iv</p>
+				<h2>Comparison between Forward-LSTM and Bi-LSTM</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>Adopting the same configuration, embedding dimension, recurrent dimension, and reducer as the previous subsection, we conducted experiments to explore the difference between the performance of Forward-LSTM and Bi-LSTM. The bi-directional model finally reached 48.46% accuracy within the first 50 epochs, taking 27.65 minutes. A possible reason causing the similar accuracy between these two models is that the reducer “reduce_sum” has captured all the necessary information for the prediction made by Bi-LSTM so that the direction of the information doesn’t make a significant contribution. Because these two models equalized the accuracy while training the Bi-LSTM also takes longer time, we decided to continue using Forward LSTM only for the next experiments.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment v</p>
+				<h2>Comparison between Classification and Regression</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>To compare the models with either classification layer or regression layer, experiments were conducted on two design of models with all the other hyperparameters keeping the same as the previous experiments. The following table shows that the classification model performs better than regression model, in terms of both prediction accuracy and time consumption.</p>
+				<div class="table-wrapper">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Method</th><th>Accuracy</th><th>Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Classification</td><td>48.49%</td><td>20.93 min</td>
+							</tr>
+							<tr>
+								<td>Regression</td><td>41.55%</td><td>21.55 min</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment vi</p>
+				<h2>Comparison between One-hot Encoding and Gaussian Filtering</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>As previously introduced, apart from the regression, the application of Gaussian filtering to the label vector. Consider is also able to capture the orderof the labels. Therefore, keeping the same configuration with the previous classification model except for the encoding method, we have conducted an experiment with Gaussian filtering. The following table shows the experiment result that the performance of Gaussian filtering is slightly better than that of one-hot vectors in terms of prediction accuracy, despite the longer time it takes. After meticulous discussion, we decide to continue the following experiments with Gaussian filtering.</p>
+				<div class="table-wrapper">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Method</th><th>Accuracy</th><th>Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>One-hot</td><td>48.49%</td><td>20.93 min</td>
+							</tr>
+							<tr>
+								<td>Gaussian filtering</td><td>48.77%</td><td>21.30 min</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment vii</p>
+				<h2>Evaluation of the Influence of Non-Chinese Words</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>In the previous experiments, the English word appeared in the datasets were treated as “UNKNOWN” which was predicted to be 3. For the next step, we keep all the non-Chinese words in the datasets and conducted experiments on the model with Gaussian filtering in the previous subsection. As the following table shows, the accuracy of predictions presents an increase.</p>
+				<div class="table-wrapper">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Non-Chinese</th><th>Vocabulary</th><th>Accuracy</th><th>Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Filted</td><td>60,831</td><td>48.77%</td><td>21.30 min</td>
+							</tr>
+							<tr>
+								<td>Not filtered</td><td>64,701</td><td>48.49%</td><td>20.93 min</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>After further investigation, it turned to be that the model is able to predict the sentiment expressed by the word “good” as 5. However, another problem was discovered that the words “you, I, the” also got predicted as 5. We analyzed the distribution of these words in sentences of different labels, which is showed in the following figure, discovering that they appeare more frequently in positive sentences. This is like the reason why the model makes biased predictions.</p>
+				<div class="figure">
+					<img style="max-width: 400px" src="images/English-words.png" alt="" />
+					<p>Distribution of 3 frequent English words in different labels.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment viii</p>
+				<h2>Evaluation of the Influence of Non-Chinese Words</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>In order to resolve the biased predictions, we sorted words in descending order of frequency in the training set, and remove the words that contained no emotion within the top 20 of the list. Specifically, some words like “不 (not)” and the exclamation mark are kept. The reason that we do not introduce “UNKNOWN” token to replace these words is that we want to avoid the possibility that “UNKNOWN” is interpreted as positive meaning. However, after this data prepocessing, the experiment result showed that the prediction accuracy decreased to 45.37%. A possible reason is that the removal of the words destroyed the structure of input sentences. After this experiment, we decided to keep those highly frequent words in place.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment ix</p>
+				<h2>Grid Search on CNN</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>Directly after we performed grid search over different RNN, we conduct our experiments with CNN. Given that on RNN, a relatively large emedding dimension works better, we started with embedding dimension as 1,000. By the time this experiment was conducted, no experiments exploring the configurations of datasets had been performed. In order to reduce the dimensionality per exploration, we fixed the data configurations the same as those in the grid search for RNN. We will combine the dataset configurations together with the best CNN model we found.</p>
+				<p>In the grid search part, we wish to find an optimal combination of number of convolutional layers, the horizontal kernel size, which convolutes over sequences and the reducer. The following figure shows the result of grid search using “reduce_max”.</p>
+				<div class="figure">
+					<img src="images/CNN-reduce-max.jpg" alt="" />
+					<p>Grid search on CNN with “reduce_max” as the reducer</p>
+				</div>
+				<p>The result shows that generally, as the horizontal kernel size increases, i.e., a kernel convolutes over more words at a time, the model performs better, which is within our expectation that as it convolutes over more words, the kernel should know more about inter-words relationships. Unexpectedly, the model performs best when there are two convolutional layers, it can be possible that as the convolutional kernels convolutes over different words, the valid sentences length shrinks. Since padding is necessary to handle sentences with only one word, as the network goes deeper, more padded values will be fed into kernels.</p>
+				<p>The following figure shows the gird search on “reduce_sum”.</p>
+				<div class="figure">
+					<img src="images/CNN-reduce-sum.jpg" alt="" />
+					<p>Grid search on CNN with “reduce_sum” as the reducer</p>
+				</div>
+				<p>Similar with the “reduce_max”, the performance of our CNN model goes down as the network goes deeper. And overall, the “reduce_sum” reducer performs poorer than the “reduce_max” reducer. One may interpret the “reduce_max” operation as a max pooling layer over the sequence dimension. The “reduce_sum” can be severely influenced by the output of those kernels that take padded 0s as input. Overall, CNN models perform better than the RNN models, which might be an indication that the scores given by the users are likely to be determined by clusters of nearby words, instead of the whole piece of text.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="content">
+	<div class="grid-style2 text">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment x</p>
+				<h2>CNN with Better Data Configurations</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>After exploring different data configurations using RNN, we migrated the optimal configurations to CNN, which is showed below:</p>
+				<div class="table-wrapper" style="max-width: 500px">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Name</th><th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Dataset</td><td>Book review</td>
+							</tr>
+							<tr>
+								<td>Gaussian Filtering</td><td>True</td>
+							</tr>
+							<tr>
+								<td>Filtering non-Chinese</td><td>False</td>
+							</tr>
+							<tr>
+								<td>Replacing frequent words with “UNKNWON”</td><td>False</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>And the model configuration is:</p>
+				<div class="table-wrapper" style="max-width: 500px">
+					<table class="table alt">
+						<thead>
+							<tr>
+								<th>Hyperparameter</th><th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>embedding dimension</td><td>1,000</td>
+							</tr>
+							<tr>
+								<td>number of layers</td><td>2</td>
+							</tr>
+							<tr>
+								<td>kernel size over sequence dimension</td><td>4</td>
+							</tr>
+							<tr>
+								<td>reducer</td><td>"reduce_max"</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>Finally, we achieved 56.88% testing accuracy on the book dataset within the first 50 epochs, as the testing accuracy continued to improve by the time the training session met its maximum epochs, it is believed that the model can achieve performance similar under the new data configuration.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="content">
+	<div class="grid-style2 text" style="border-bottom: none;">
+		<div class="align-center">
+			<header class="align-center">
+				<p> experiment xi</p>
+				<h2>CNN on Movie Review Dataset</h2>
+			</header>
+		</div>
+		<div>
+			<div class="content-text">
+				<p>Given that the current CNN is the best available model, we decided to test our model out on the movie review dataset. With the same configuration as that of the book review dataset, the model achieved 55.91% accuracy on the movie review dataset. Considering that the binary accuracy predicted by “‘SnowNLP”’ for movie dataset is 2% lower than that of the book dataset, we believed the model has met its potential.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of Content -->
+
+				</div>
+			</div>
+		</section>
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<!-- load -->
+		</footer>
+
+
+	</body>
+</html>
